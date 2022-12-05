@@ -13,6 +13,10 @@ module.exports.GetImage2textResult_001 = (event, context, callback) => {
   // Search for the face based on the JSON JobID value
   
   return GetFaceSearch(data.JobID).then(jsonResult => {
+	  
+	  
+	  
+	  
     console.log(jsonResult);
 	
   // Add Code here to Store/Process jsonResult (API reply or DB Insert)
@@ -35,11 +39,14 @@ function GetFaceSearch(jobid) {
    // This Will return the jsonResult of the request
 
    return rekognition.GetFaceSearch(params).promise().then(data => {
-      return data;
+		return {
+		statusCode: 200,
+			body: data
+
+		};
    }).catch(error => {
      console.log(error);
      return error;
    });  
 }
-
 
